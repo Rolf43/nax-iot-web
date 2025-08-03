@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAX-IoT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/index.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .dropdown-menu {
+            right: 0;
+            left: auto;
+        }
+    </style>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/navbar.js"></script>
+    <script src="../js/checkToken.js"></script>
+    <script src="../js/logOut.js"></script>
+    <script>
+        checkToken();
+    </script>
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <div class="container">
+                <img src="../img/logo.svg" width="30" height="24">
+                <a class="navbar-brand" href="./about.html">NAX-IoT</a>
+            </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="./main.html">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./graphs.html">Gráficos</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <script>
+                        const token = localStorage.getItem('authToken');  // O de donde lo tengas almacenado
+                        if (token) {
+                            actualizarNavbarConUsuario(token);
+                        }
+                    </script>
+                    <span id="navbar-user"></span> 
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end w-auto">
+                    <!-- <li><a class="dropdown-item" href="./profile.html">Perfil</a></li> -->
+                    <li><a class="dropdown-item" href="./devices.html">Dispositivos</a></li>
+                    <li><a class="dropdown-item" href="./patients.html">Pacientes</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" onclick="logOut()">Cerrar Sesión</a></li>
+                </ul>
+            </li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+    
+    <div class="container mt-4">
+        <div class="row g-2">
+            <div class="col-md-8">
+                <input type="text" id="patientName" class="form-control" placeholder="Ingrese el nombre del paciente">
+            </div>
+            <div class="col-md-2 d-flex align-items-end">
+                <button class="btn btn-primary w-100" onclick="fetchPatientData()">Buscar</button>
+            </div>
+            <div class="col-md-2 d-flex align-items-end">
+                <div class="dropdown w-100">
+                    <button class="btn btn-primary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        Descargar
+                    </button>
+                    <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item" href="#" onclick="downloadData('json')">Descargar como JSON</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="downloadData('xml')">Descargar como XML</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="downloadData('csv')">Descargar como CSV</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3" id="charts-container">
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-header">Pulsaciones por minuto (bpm)</div>
+                    <div class="card-body"><canvas id="scatterChart1"></canvas></div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-header">Porcentaje de Oxígeno en la Sangre (%)</div>
+                    <div class="card-body"><canvas id="scatterChart2"></canvas></div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-header">Presión Sistólica (mmHg)</div>
+                    <div class="card-body"><canvas id="scatterChart3"></canvas></div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-header">Presión Diastólica (mmHg)</div>
+                    <div class="card-body"><canvas id="scatterChart4"></canvas></div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-header">Temperatura (°C)</div>
+                    <div class="card-body"><canvas id="scatterChart5"></canvas></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../js/fetchData.js"></script>
+    <script src="../js/dataExport.js"></script>
+    <script src="../js/dataFetch.js"></script>
+</body>
+</html>

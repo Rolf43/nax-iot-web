@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAX-IoT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .id-column {
+            max-width: 150px;  /* Limitar el ancho de la celda */
+            word-wrap: break-word; /* Permitir que el texto se ajuste a múltiples líneas */
+            overflow: hidden; /* Ocultar cualquier texto que no quepa en el ancho establecido */
+            white-space: normal; /* Permitir saltos de línea */
+            word-break: break-all; /* Asegura que el texto largo se rompa en cualquier lugar */
+        }
+        .dropdown-menu {
+            right: 0;
+            left: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="../js/navbar.js"></script>
+    <script src="../js/checkToken.js"></script>
+    <script src="../js/logOut.js"></script>
+    <script>
+        checkToken();
+    </script>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <div class="container">
+                <img src="../img/logo.svg" width="30" height="24">
+                <a class="navbar-brand" href="./about.html">NAX-IoT</a>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="./main.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./graphs.html">Gráficos</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <script>
+                                const token = localStorage.getItem('authToken');  // O de donde lo tengas almacenado
+                                if (token) {
+                                    actualizarNavbarConUsuario(token);
+                                }
+                              </script>
+                              <span id="navbar-user"></span> 
+                        </a>
+                        <!-- Dropdown-menu sin el div -->
+                        <ul class="dropdown-menu dropdown-menu-end w-auto">
+                            <!-- <li><a class="dropdown-item" href="./profile.html">Perfil</a></li> -->
+                            <li><a class="dropdown-item" href="./devices.html">Dispositivos</a></li>
+                            <li><a class="dropdown-item" href="./patients.html">Pacientes</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" onclick="logOut()">Cerrar Sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Columna del formulario -->
+            <div class="col-md-4">
+                <h2>Registrar Dispositivo</h2>
+                <form id="deviceForm" class="mb-4">
+                    <input type="text" class="form-control hidden" id="idDevice" name="idDevice" value="000">
+                    <input type="text" class="form-control hidden" id="accion" name="accion" value="insertar">
+                    <div class="mb-3">
+                        <label for="deviceName" class="form-label">Nombre del Dispositivo</label>
+                        <input type="text" class="form-control" id="deviceName" name="deviceName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="deviceModel" class="form-label">Modelo</label>
+                        <input type="text" class="form-control" id="deviceModel" name="deviceModel" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="patientId" class="form-label">ID del Paciente</label>
+                        <input type="text" class="form-control" id="patientId" name="patientId" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="deviceStatus" class="form-label">Estado del Dispositivo</label>
+                        <select class="form-control" id="deviceStatus" name="deviceStatus" required>
+                            <option value="Activo">Activo</option>
+                            <option value="Inactivo">Inactivo</option>
+                            <option value="Mantenimiento">Mantenimiento</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="registrationDate" class="form-label">Fecha de Registro</label>
+                        <input type="date" class="form-control" id="registrationDate" name="registrationDate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastCalibration" class="form-label">Fecha de Última Calibración</label>
+                        <input type="date" class="form-control" id="lastCalibration" name="lastCalibration">
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="btnRegistrarActualizar">Registrar</button>
+                </form>
+            </div>
+            <!-- Columna de la tabla -->
+            <div class="col-md-8">
+                <h2>Dispositivos Registrados</h2>
+                <form class="input-group mb-3" id="busqueda">
+                    <input type="text" class="form-control" id="busq" placeholder="Barra de busqueda">
+                    <button class="btn btn-info" type="submit" id="search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Token</th>
+                            <th>Nombre</th>
+                            <th>Modelo</th>
+                            <th>ID del Paciente</th>
+                            <th>Estado</th>
+                            <th>Fecha de Registro</th>
+                            <th>Fecha de Última Calibración</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultados">
+                        <!-- Aquí se llenarán los datos de los dispositivos -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../js/jquery-3.6.0.min.js"></script>
+<script src="../js/devices.js"></script>
+
+</html>

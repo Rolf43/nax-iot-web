@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAX-IoT</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card-header {
+            cursor: pointer;
+            border-bottom: none;
+        }
+
+        .active-tab {
+            color: #0d6efd;
+            border-bottom: 2px solid #0d6efd;
+        }
+
+        .inactive-tab {
+            color: #000;
+            border-bottom: 2px solid transparent;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .card-body {
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <!-- Cabeceras para alternar entre modos -->
+                    <div class="card-header d-flex justify-content-center">
+                        <h5 id="loginTab" class="active-tab py-2 px-4">Iniciar Sesión</h5>
+                        <h5 id="registerTab" class="inactive-tab py-2 px-4">Registrarse</h5>
+                    </div>
+                    <!-- Contenido del formulario -->
+                    <div class="card-body">
+                        <form id="authForm">
+                            <input type="text" class="form-control oculto" id="accion" name="accion" value="logear">
+                            <!-- Campo Nombre (solo visible en Registro) -->
+                            <div class="mb-3 hidden" id="nameField">
+                                <label for="registerName" class="form-label">Nombre Completo</label>
+                                <input type="text" class="form-control" id="registerName" name="usuario" placeholder="Ingresa tu nombre completo">
+                            </div>
+                            <!-- Campo Correo Electrónico -->
+                            <div class="mb-3" id="emailField">
+                                <label for="authEmail" class="form-label">Correo Electrónico</label>
+                                <input type="email" class="form-control" id="authEmail" name="email" placeholder="Ingresa tu correo" required>
+                            </div>
+                            <!-- Campo Contraseña -->
+                            <div class="mb-3">
+                                <label for="authPassword" class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" id="authPassword" name="clave" placeholder="Ingresa tu contraseña" required>
+                            </div>
+                            <!-- Campo Confirmar Contraseña (solo visible en Registro) -->
+                            <div class="mb-3 hidden" id="confirmPasswordField">
+                                <label for="registerConfirmPassword" class="form-label">Confirmar Contraseña</label>
+                                <input type="password" class="form-control" id="registerConfirmPassword" name="clave2" placeholder="Repite la contraseña">
+                            </div>
+                            <!-- Botón de Enviar -->
+                            <button type="submit" class="btn btn-primary w-100" id="submitButton">Iniciar Sesión</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS y JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>
