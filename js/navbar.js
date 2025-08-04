@@ -1,6 +1,6 @@
 // Función para obtener los detalles del usuario y actualizar la navbar
 function actualizarNavbarConUsuario(token) {
-    fetch('http://192.168.1.4:5001/api/users/me', {
+    fetch('https://nax-iot-api.onrender.com/api/users/me', {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`  // Incluye el token en el encabezado
