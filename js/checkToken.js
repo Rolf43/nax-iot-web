@@ -10,7 +10,7 @@ function checkToken() {
     }
 
     // Verifica el token enviando una solicitud al backend para comprobar su validez
-    fetch('http://192.168.1.4:5001/api/users/me', {
+    fetch('https://nax-iot-api.onrender.com/api/users/me', {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`,
