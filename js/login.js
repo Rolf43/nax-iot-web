@@ -82,7 +82,7 @@ $(document).ready(function () {
                     }),
                 });
 
-                console.log(password);
+                console.log("PASS");
                 // Manejar la respuesta del backend
                 const data = await response.json();
 
