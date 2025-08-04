@@ -70,7 +70,7 @@ $(document).ready(function () {
 
             try {
                 // Realizar la solicitud POST para registrar al usuario
-                const response = await fetch('http://192.168.1.4:5001/api/users/register', {
+                const response = await fetch('https://nax-iot-api.onrender.com/api/users/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
