@@ -12,7 +12,7 @@ async function fetchPatientCard() {
         return;
     }
 
-    const url = `http://192.168.1.4:5001/api/records/data?name=${encodeURIComponent(patientName)}`;
+    const url = `https://nax-iot-api.onrender.com/api/records/data?name=${encodeURIComponent(patientName)}`;
 
     try {
         const response = await fetch(url, {
