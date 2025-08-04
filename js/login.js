@@ -80,10 +80,9 @@ $(document).ready(function () {
                         email,
                         password
                     }),
-                    console.log(body);
                 });
 
-
+                console.log(password);
                 // Manejar la respuesta del backend
                 const data = await response.json();
 
