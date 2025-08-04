@@ -39,11 +39,11 @@ $(document).ready(function(){
 
     function enviarPaciente(patientData) {
         let accion = $("#accion").val();
-        let url = "http://192.168.1.4:5001/api/patients/register";
+        let url = "https://nax-iot-api.onrender.com/api/patients/register";
         let method = "POST";
 
         if (accion === "actualizar") {
-            url = `http://192.168.1.4:5001/api/patients/update/${$("#idPatient").val()}`;
+            url = `https://nax-iot-api.onrender.com/api/patients/update/${$("#idPatient").val()}`;
             method = "PUT";
         }
 
@@ -68,7 +68,7 @@ $(document).ready(function(){
 
     // Función para buscar y mostrar los pacientes registrados
     function buscarMostrar(dato = "", nroRegistros = 0, inicioRegistros = 0) {
-        fetch(`http://192.168.1.4:5001/api/patients/list?buscar=${dato}&nroReg=${nroRegistros}&inicioReg=${inicioRegistros}`, {
+        fetch(`https://nax-iot-api.onrender.com/api/patients/list?buscar=${dato}&nroReg=${nroRegistros}&inicioReg=${inicioRegistros}`, {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
@@ -130,7 +130,7 @@ $(document).ready(function(){
         let idPaciente = registros.data[indice]._id;
 
         if (confirm("¿Estás seguro de que quieres eliminar este paciente?")) {
-            fetch(`http://192.168.1.4:5001/api/patients/${idPaciente}`, {
+            fetch(`https://nax-iot-api.onrender.com/api/patients/${idPaciente}`, {
                 method: "DELETE",
                 headers: {
                     'Content-Type': 'application/json',
