@@ -2,7 +2,7 @@
 function logOut() {
     const token = localStorage.getItem('authToken');
 
-    fetch('http://192.168.1.4:5001/api/users/logout', {
+    fetch('https://nax-iot-api.onrender.com/api/users/logout', {
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${token}`  // Incluye el token en el encabezado
