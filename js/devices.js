@@ -26,7 +26,7 @@ $(document).ready(function(){
         //console.log(accion);
 
         if (accion == "insertar"){
-            fetch("http://192.168.1.4:5001/api/devices/register", {
+            fetch("https://nax-iot-api.onrender.com/api/devices/register", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ $(document).ready(function(){
 
     // Función para buscar y mostrar los dispositivos registrados
     function buscarMostrar(dato = "", nroRegistros = 0, inicioRegistros = 0) {
-        fetch(`http://192.168.1.4:5001/api/devices/list?buscar=${dato}&nroReg=${nroRegistros}&inicioReg=${inicioRegistros}`, {
+        fetch(`https://nax-iot-api.onrender.com/api/devices/list?buscar=${dato}&nroReg=${nroRegistros}&inicioReg=${inicioRegistros}`, {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
