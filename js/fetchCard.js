@@ -58,7 +58,10 @@ function formatDate(dateString) {
 
 function updateCards(data) {
     if (data.length > 1) {
+        console.log(data);
         data = data.slice(0); // Obtener el último registro
+        console.log("123");
+        console.log(data);
     }
 
     document.getElementById("bpm").innerHTML=`${data[0].bpm}<small class="text-muted"> bpm</small>`;
