@@ -58,14 +58,14 @@ function formatDate(dateString) {
 
 function updateCards(data) {
     if (data.length > 1) {
-        data = data.sort({ recordedAt: -1 }); // Obtener el último registro
+        data = data.slice(-1); // Obtener el último registro
     }
 
     document.getElementById("bpm").innerHTML=`${data[0].bpm}<small class="text-muted"> bpm</small>`;
     document.getElementById("Spo2").innerHTML=`${data[0].spo2}<small class="text-muted"> %SpO2</small>`;
     document.getElementById("Temp").innerHTML=`${data[0].temp}<small class="text-muted"> °C</small>`;
     document.getElementById("PresS").innerHTML=`${data[0].p_sys}<small class="text-muted"> mmHg</small>`;
-    document.getElementById("PresD").innerHTML=`${data[0].p_dia}<small class="text-muted"> mmHg-t</small>`;
+    document.getElementById("PresD").innerHTML=`${data[0].p_dia}<small class="text-muted"> mmHg</small>`;
 
     document.getElementById("bpmT").innerHTML=`${formatDate(data[0].recordedAt)}`;
     document.getElementById("Spo2T").innerHTML=`${formatDate(data[0].recordedAt)}`;
